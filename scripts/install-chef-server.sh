@@ -21,6 +21,8 @@ gem install chef-server chef-server-api chef-server chef-solr chef-server-webui 
 mkdir -p /etc/chef
 mkdir -p /var/chef
 
+chef-solr-installer
+
 wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef/chef-server-default.rb -O /etc/chef/server.rb
 wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef/chef-expander.conf -O /etc/init/chef-expander.conf
 wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef/chef-solr.conf -O /etc/init/chef-solr.conf
