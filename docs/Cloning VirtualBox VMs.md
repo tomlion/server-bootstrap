@@ -35,3 +35,17 @@ If that's working, let's make sure these changes stay permanent. Edit (as root) 
     broadcast 10.0.30.255
 
 Reboot the machine, and make the same checks as above to verify that the address stuck.
+
+## Changing the Host Name
+
+You probably don't want this to have the same host name as the VM you cloned it from, so let's tweak a few things. Do all the following as root:
+
+    hostname newhostname
+    
+    vi /etc/hostname
+    # change the value to your new host name
+    
+    vi /etc/hosts
+    # change the values in here as well
+    
+Reboot the machine one last time, and you're all set.
