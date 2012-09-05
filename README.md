@@ -1,22 +1,26 @@
 # Server Bootstrap
 
-I've done a ton of work setting up various servers, but I've never really made it a point to document everything
-that I do... I aim to fix that with this repo.
+Ever wanted to know the best way to set up an Ubuntu server for rails apps, or other fancy-pants web stuff? Me too!
 
-Basically, I have set up a bunch of ubuntu servers in the past, and am in the process of setting up some new 12.04 LTS
-servers to run my rails apps. It seemed like it was time to document EVERYTHING that I do, partly to share my knowledge,
-and partly to keep me from forgetting what the hell it is I do every time.
+I've spent a lot of time doing infrastructure work, setting up servers, solving problems, and all that crap, and figured
+it was time that I started writing some of this stuff down. Is any of this the "best" way to do stuff? Probably not, but it
+works pretty damn well for me, and it might for you as well.
 
-I'm also including various scripts that are useful for bootstrapping various setups and configurations.
+So what is all this? Mostly documentation, but there are some nice scripts, templates, configs, and more to help you set up
+your (mostly rails) web servers. Remember, this is the way I do this, so there's a lot of things here that are meant to
+help me do what I do faster. The best way to figure all this stuff out is to start digging around.
 
-Finally, there's also good stuff around various other things like chef, nginx configs, capistrano stuff, and more. I'll do
-my best to note where I get everything from, but if you see something here that's yours and I haven't credited you, lemme know
-and I'll make things right.
+I've sourced a lot of this from the internets, and I've done my best to give credit wherever appropriate, but I may have missed
+something, so please call me on it if I have so I can make things right.
 
-## IMPORTANT!
+Enjoy!
 
-I will not support you, I provide no warranty, use this stuff at your own risk, etc. I'm happy to collaborate on this stuff, but
-you're on your own with a lot of it.
+### IMPORTANT!
+
+I will not support you, I provide no warranty, use this stuff at your own risk, etc. I'm happy to collaborate and take suggestions,
+but you're totally on your own with everything here.
+
+---
 
 ## Contributing
 
