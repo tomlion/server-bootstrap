@@ -19,4 +19,10 @@ rabbitmqctl set_permissions -p /chef chef ".*" ".*" ".*"
 gem install chef-server chef-server-api chef-server chef-solr chef-server-webui --no-ri --no-rdoc
 
 mkdir -p /etc/chef
-wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef-server-default.rb -O /etc/chef/server.rb
+mkdir -p /var/chef
+
+wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef/chef-server-default.rb -O /etc/chef/server.rb
+wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef/chef-expander.conf -O /etc/init/chef-expander.conf
+wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef/chef-solr.conf -O /etc/init/chef-solr.conf
+wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef/chef-server.conf -O /etc/init/chef-server.conf
+wget https://raw.github.com/masterexploder/server-bootstrap/master/configs/chef/chef-server-web.conf -O /etc/init/chef-server-web.conf
