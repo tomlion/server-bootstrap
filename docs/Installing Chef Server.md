@@ -41,3 +41,53 @@ Since the script created a bunch of upstart scripts, starting things is just a m
 Once those have done their thing (which should be quick), you can open up a browser and hit the web UI at whatever URL you used for `chef_server_url` in the `server.rb` config. You should also take note of the admin credentials in there, which are `admin` and `p@ssw0rd1`. You'll be prompted to change that password on first login.
 
 If you can hit the web UI and log in, you're ready to move on.
+
+## Configure Knife Client
+
+We'll want to run this as our normal user (in my examples, "vagrant"):
+
+    mkdir -p ~/.chef
+    sudo cp /etc/chef/validation.pem /etc/chef/webui.pem ~/.chef
+    sudo chown -R $USER ~/.chef
+    knife configure -i
+    
+Then answer the questions as follows:
+
+    here should I put the config file? [/home/vagrant/.chef/knife.rb] 
+    Please enter the chef server URL: [http://yourserver:4000] http://yourserver:4000
+    Please enter a clientname for the new client: [vagrant] 
+    Please enter the existing admin clientname: [chef-webui] 
+    Please enter the location of the existing admin client's private key: [/etc/chef/webui.pem] .chef/webui.pem
+    Please enter the validation clientname: [chef-validator] 
+    Please enter the location of the validation key: [/etc/chef/validation.pem] .chef/validation.pem
+    Please enter the path to a chef repository (or leave blank):
+    
+That's it. Let's make sure we've done everything right. Run `knife client list` and `knife cookbook list`. If you get output for the first, and nothing for the second, everything's good.
+
+Next, we'll set up a client account to use on your laptop/desktop/whatever. So, again, on the server as the user you just set up knife with, run the following:
+
+    knife client create my-username -d -a -f /tmp/my-username.pem
+    knife client show my-username
+    
+That should yield some output to the nature of:
+
+    _rev:        1-06766130209d9049babbd3b96488f4db
+    admin:       true
+    chef_type:   client
+    json_class:  Chef::ApiClient
+    name:        ian
+    public_key:  -----BEGIN PUBLIC KEY-----
+                 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0yJQit7JiIVHx+kQYVhp
+                 (...)
+                 ZwIDAQAB
+                 -----END PUBLIC KEY-----
+                 
+If we're good so far, it's time to set things up on your laptop. If you've made it this far, I'm going to assume you've got ruby installed locally, and you've installed the `chef` gem as well. If you haven't, do that.
+
+OK, again, on your laptop, run the following:
+
+    mkdir ~/.chef
+    scp user@your-chef-server:/tmp/my-username.pem ~/.chef/my-username.pem
+    knife configure
+    
+And answer the questions accordingly. Once more, to validate everything worked, run `knife client list` and `knife client show chef-validator`. You get output? Yeah? You rock, and your chef server is set up.
