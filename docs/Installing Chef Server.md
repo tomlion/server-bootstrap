@@ -14,6 +14,8 @@ So, run the following as root:
     
 This takes care of grabbing all the pre-requisites, creating upstart scripts, as well as a sample config file. Take a look at the script if you're interested in what it does, but its essentially just a consolodated version of the chef server manual install steps from their site.
 
+**Note**: Sometimes the above fails for whatever reason (usually around grabbing stuff from opscode apt repo). If it does, just run the script again and everything should be fine.
+
 ## Configure the Server
 
 The above script grabs a boilerplate config file and drops it in `/etc/chef/server.rb`. Go ahead and open that up, and make any changes that you feel are necessary, but most likely you'll only need to tweak the `chef_server_url`. When I'm doing this with VMs set up with host-only networking, I use the machine's IP address.
