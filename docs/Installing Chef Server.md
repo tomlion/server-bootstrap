@@ -88,6 +88,7 @@ OK, again, on your laptop, run the following:
 
     mkdir ~/.chef
     scp user@your-chef-server:/tmp/my-username.pem ~/.chef/my-username.pem
+    scp user@your-chef-server:./.chef/validation.pem ~/.chef/validation.pem
     knife configure
     
-And answer the questions accordingly. Once more, to validate everything worked, run `knife client list` and `knife client show chef-validator`. You get output? Yeah? You rock, and your chef server is set up.
+And answer the questions accordingly (pay attention to the location of the validation.pem). Once more, to validate everything worked, run `knife client list` and `knife client show chef-validator`. You get output? Yeah? You rock, and your chef server is set up.
