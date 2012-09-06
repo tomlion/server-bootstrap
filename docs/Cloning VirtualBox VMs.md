@@ -40,12 +40,12 @@ Reboot the machine, and make the same checks as above to verify that the address
 
 You probably don't want this to have the same host name as the VM you cloned it from, so let's tweak a few things. Do all the following as root:
 
-    hostname newhostname
-    
-    vi /etc/hostname
-    # change the value to your new host name
-    
+    # Chnage the 127.0.0.1 line from the old hostname to the new:
     vi /etc/hosts
-    # change the values in here as well
+    
+    Change the hostname in here:
+    vi /etc/hostname    
+    
+    hostname newhostname    
     
 Reboot the machine one last time, and you're all set.
