@@ -1,0 +1,55 @@
+# you generally only need one nginx worker unless you're serving
+# large amounts of static files which require blocking disk reads
+worker_processes 1;
+
+# # drop privileges, root is needed on most systems for binding to port 80
+# # (or anything < 1024).  Capability-based security may be available for
+# # your system and worth checking out so you won't need to be root to
+# # start nginx to bind on 80
+# user www-data;
+user nobody nogroup;
+
+pid /var/run/nginx.pid;
+error_log /var/log/nginx/error.log;
+
+events {
+  worker_connections 1024;  # increase if you have lots of clients
+  accept_mutex off;         # "on" if nginx worker_processes > 1
+}
+
+http {
+  include /etc/nginx/mime.types;
+
+  # fallback in case we can't determine a type
+  default_type application/octet-stream;
+
+  # click tracking!
+  access_log /var/log/nginx/access.log combined;
+
+  # you generally want to serve static files with nginx since neither
+  # Unicorn nor Rainbows! is optimized for it at the moment
+  sendfile on;
+
+  tcp_nopush on; # off may be better for *some* Comet/long-poll stuff
+  tcp_nodelay off; # on may be better for some Comet/long-poll stuff
+
+  # we haven't checked to see if Rack::Deflate on the app server is
+  # faster or not than doing compression via nginx.  It's easier
+  # to configure it all in one place here for static files and also
+  # to disable gzip for clients who don't get gzip/deflate right.
+  # There are other other gzip settings that may be needed used to deal with
+  # bad clients out there, see http://wiki.nginx.org/NginxHttpGzipModule
+  gzip on;
+  gzip_http_version 1.0;
+  gzip_proxied any;
+  gzip_min_length 500;
+  gzip_disable "MSIE [1-6]\.";
+  gzip_types text/plain text/html text/xml text/css
+             text/comma-separated-values
+             text/javascript application/x-javascript
+             application/atom+xml;
+
+  # include other goodness
+  include /etc/nginx/conf.d/*.conf;
+  include /etc/nginx/sites-enabled/*;
+}

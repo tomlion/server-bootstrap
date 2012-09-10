@@ -1,0 +1,10 @@
+default[:redis] = {}
+default[:redis][:bind_address] = '0.0.0.0'
+default[:redis][:port]         = 6379
+default[:redis][:version]      = '2.4.17'
+default[:redis][:datadir]      = '/var/redis/6379'
+default[:redis][:prefix]       = '/usr/local'
+default[:redis][:log_level]    = 'notice'
+default[:redis][:log_file]     = '/var/log/redis/6379.log'
+default[:redis][:pid_file]     = '/var/run/redis_6379.pid'
+default[:redis][:num_dbs]      = 19

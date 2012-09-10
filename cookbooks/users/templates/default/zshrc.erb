@@ -1,0 +1,47 @@
+alias ..="cd .."
+
+alias ls="ls -FG"
+alias l="ls -lGh"
+alias ll="ls -lah"
+
+alias df="df -h"
+alias psx="ps ax | grep $1"
+alias k="clear"
+alias v="vim"
+alias top="htop"
+
+# the other git stuff
+alias gl='git pull'
+alias gp='git push'
+alias gd='git diff'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gco='git checkout'
+alias gb='git branch'
+alias gs='git status'
+alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
+alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
+
+setopt prompt_subst
+autoload colors
+colors
+
+
+# Set up a sexy prompt and stuff :)
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
+}
+#use extended color pallete if available
+if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+    turquoise="$fg[blue]"
+    orange="$fg[yellow]"
+    purple="$fg[magenta]"
+    hotpink="$fg[red]"
+    limegreen="$fg[green]"
+    brightgreen="$fg_bold[green]"
+    yellow="$fg_bold[yellow]"
+fi
+
+PROMPT=$'
+%{$orange%}%m%{$reset_color%} %{$limegreen%}%~%{$reset_color%} $(virtualenv_info)
+$ '
