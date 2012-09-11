@@ -28,7 +28,7 @@ There's only one attribute used:
 
 The values of this node look like:
 
-    node[:rails_sites][:my_app] = { :id => "myapp", :enabled => true }
+    node[:rails_sites][:my_app] = { :id => "myapp", :enabled => true, :rails_env => "production" }
 
 
 Usage
@@ -50,7 +50,6 @@ whatever you want, and use the following json with the appropriate changes for y
       },
       "capified":     true,                     # whether or not you'll use capistrano for deploys
       "server_name":  "hostname.com 127.0.0.1", # this will be placed in the nginx config's server_name attribute
-      "rails_env":    "production",             # the environment to set in the various configs, wherever appropriate
       "web_server":   "puma",                   # the web server to assume, either "puma" or "unicorn"
       "http_port":    80,
       "https_port":   443
@@ -71,7 +70,6 @@ For the sake of easy copy/paste, here's the above uncommented:
       },
       "capified":     true,
       "server_name":  "hostname.com 127.0.0.1",
-      "rails_env":    "production",
       "web_server":   "puma",
       "http_port":    80,
       "https_port":   443

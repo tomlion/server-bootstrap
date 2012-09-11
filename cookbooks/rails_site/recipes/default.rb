@@ -37,7 +37,7 @@ node[:rails_sites].each do |k, v|
     :capified     => data['capified']     || false,
     :http_port    => data['http_port']    || 80,
     :https_port   => data['https_port']   || 443,
-    :rails_env    => data['rails_env']    || 'production',
+    :rails_env    => v[:rails_env]        || 'production',
     :server_type  => data['web_server']   || 'puma',
     :server_name  => data['server_name']  || '127.0.0.1'
   }
