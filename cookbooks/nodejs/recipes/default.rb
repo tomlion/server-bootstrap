@@ -31,12 +31,10 @@ execute "cd /src/node-v#{node_version} && ./configure" do
   not_if &node_already_installed
 end
 
-execute "make" do
-  cwd "/src/node-v#{node_version}"
+execute "cd /src/node-v#{node_version} && make" do
   not_if &node_already_installed
 end
 
-execute "make install" do
-  cwd "/src/node-v#{node_version}"
+execute "cd /src/node-v#{node_version} && make install" do
   not_if &node_already_installed
 end
