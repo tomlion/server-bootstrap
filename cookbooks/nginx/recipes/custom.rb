@@ -24,13 +24,24 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+nginx_installed = `dpkg-query -W --showformat='${Status}\n' nginx-custom|grep "install ok installed"`.strip
+nginx_already_installed = lambda do
+  nginx_installed == "install ok installed"
+end
+
 execute "add nginx ppa" do
   command "add-apt-repository ppa:brianmercer/nginx"
+  not_if &nginx_already_installed
 end
 
 execute "update sources" do
   command "apt-get -y -f -m update"
+  not_if &nginx_already_installed
 end
 
-package "nginx-custom"
+package "nginx-custom" do
+  action :install
+  not_if &nginx_already_installed
+end
+
 include_recipe "nginx::configure"
