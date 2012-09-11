@@ -26,10 +26,30 @@
 
 include_recipe "nginx::service"
 
+nginx_installed = `dpkg-query -W --showformat='${Status}\n' nginx-custom|grep "install ok installed"`.strip
+nginx_already_installed = lambda do
+  nginx_installed == "install ok installed"
+end
+
 template "/etc/nginx/nginx.conf" do
   source "nginx.conf.erb"
   owner "root"
   group "root"
 
   notifies :restart, resources(:service => "nginx"), :immediately
+  not_if &nginx_already_installed
+end
+
+cookbook_file "/usr/sbin/nginx_ensite" do
+  source "nginx_ensite"
+  owner  "root"
+  group  "root"
+  mode   "0755"
+end
+
+cookbook_file "/usr/sbin/nginx_dissite" do
+  source "nginx_ensite"
+  owner  "root"
+  group  "root"
+  mode   "0755"
 end
